@@ -3,8 +3,8 @@ import { Camera } from "expo-camera";
 import styled from "styled-components/native";
 import { ActivityIndicator, Text } from "react-native";
 import Revert from "../Contents/Revert";
-import Screen from "../Contents/Screen";
 import WhiteBalance from "../Contents/WhiteBalance";
+import Screen from "../Contents/Screen";
 
 const Container = styled.View`
   justify-content: flex-start;
