@@ -43,7 +43,12 @@ const Setting = () => {
     return (
       <Container>
         <WhiteBalance setWhiteBalance={setWhiteBalance} />
-        <Screen type={type} zoom={zoom} whiteBalance={whiteBalance} />
+        <Screen
+          type={type}
+          zoom={zoom}
+          whiteBalance={whiteBalance}
+          setHasPermission={setHasPermission}
+        />
         <Revert type={type} setType={setType} setZoom={setZoom} />
       </Container>
     );
