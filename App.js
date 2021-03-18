@@ -1,39 +1,81 @@
 import React, { useState, useEffect } from "react";
 import { Camera } from "expo-camera";
-import { ActivityIndicator, Text, View } from "react-native";
+import styled from "styled-components/native";
+import {
+  ActivityIndicator,
+  Dimensions,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import { Ionicons } from "@expo/vector-icons";
+
+const { width: WIDTH, height: HEIGHT } = Dimensions.get("window");
+
+const Container = styled.View`
+  justify-content: center;
+  align-items: center;
+  background-color: cornflowerblue;
+  flex: 1;
+`;
 
 const App = () => {
-  const [hasPermission, setHasPermission] = useState(null);
+  const [hasPermission, setHasPermission] = useState(true);
   const [type, setType] = useState(Camera.Constants.Type.back);
 
   useEffect(() => {
     async () => {
       const { status } = await Camera.requestPermissionsAsync();
-      if (status === "granted") {
-        setHasPermission(true);
-      } else {
-        setHasPermission(false);
-      }
+      setHasPermission(status === "granted");
     };
   }, []);
 
-  if (hasPermission === true) {
+  if (hasPermission === null) {
     return (
-      <View>
-        <Text>접근 허용되었습니다.</Text>
-      </View>
+      <Container>
+        <ActivityIndicator size="large" color="white" />
+      </Container>
     );
   } else if (hasPermission === false) {
     return (
-      <View>
-        <Text>접근이 거절되었습니다.</Text>
-      </View>
+      <Container>
+        <Text>접근 차단</Text>
+      </Container>
     );
   } else {
-    return <ActivityIndicator />;
+    return (
+      <Container>
+        <Camera
+          style={{
+            width: WIDTH / 1.2,
+            height: HEIGHT / 2,
+            borderRadius: 20,
+            overflow: "hidden",
+          }}
+          type={type}
+        />
+        <TouchableOpacity
+          onPress={() =>
+            setType(
+              type === Camera.Constants.Type.back
+                ? Camera.Constants.Type.front
+                : Camera.Constants.Type.back
+            )
+          }
+        >
+          <Ionicons
+            name={
+              type === Camera.Constants.Type.back
+                ? "camera-reverse"
+                : "camera-outline"
+            }
+            size={50}
+            color="black"
+          />
+        </TouchableOpacity>
+      </Container>
+    );
   }
-
-  return <></>;
 };
 
 export default App;
