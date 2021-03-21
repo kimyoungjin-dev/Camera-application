@@ -10,7 +10,7 @@ const Container = styled.View`
   justify-content: flex-start;
   padding-top: 50px;
   align-items: center;
-  background-color: #f67280;
+  background-color: cornflowerblue;
   flex: 1;
 `;
 
@@ -49,7 +49,7 @@ const Setting = () => {
           whiteBalance={whiteBalance}
           setHasPermission={setHasPermission}
         />
-        <Revert type={type} setType={setType} setZoom={setZoom} />
+        <Revert type={type} setType={setType} setZoom={setZoom} zoom={zoom} />
       </Container>
     );
   }

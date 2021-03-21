@@ -6,16 +6,17 @@ const Container = styled.View`
   position: absolute;
   flex-direction: row;
   right: 0;
+  padding-right: 10px;
 `;
 
-const Zoom = ({ setZoom }) => {
+const Zoom = ({ setZoom, zoom }) => {
   return (
     <Container>
       <FontAwesome
         name={"plus-circle"}
         size={40}
         color="white"
-        onPress={() => setZoom((zoom) => zoom + 0.05)}
+        onPress={() => setZoom((zoom) => zoom + 0.03)}
         style={{ marginRight: 30 }}
       />
 
@@ -23,7 +24,7 @@ const Zoom = ({ setZoom }) => {
         name={"minus-circle"}
         size={40}
         color="white"
-        onPress={() => setZoom((zoom) => zoom - 0.05)}
+        onPress={() => setZoom((zoom) => zoom - 0.03)}
       />
     </Container>
   );

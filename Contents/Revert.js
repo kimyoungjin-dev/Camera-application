@@ -1,5 +1,5 @@
 import React from "react";
-import { TouchableOpacity } from "react-native";
+import { TouchableOpacity, Text } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { Camera } from "expo-camera";
 import styled from "styled-components/native";
@@ -12,28 +12,37 @@ const Container = styled.View`
   align-items: center;
 `;
 
+const Contents = styled.View`
+  align-items: center;
+`;
+
 const Revert = ({ type, setType, setZoom }) => {
   return (
     <Container>
-      <TouchableOpacity
-        onPress={() =>
-          setType(
-            type === Camera.Constants.Type.back
-              ? Camera.Constants.Type.front
-              : Camera.Constants.Type.back
-          )
-        }
-      >
-        <Ionicons
-          name={
-            type === Camera.Constants.Type.back
-              ? "camera-reverse"
-              : "camera-outline"
+      <Contents>
+        <TouchableOpacity
+          onPress={() =>
+            setType(
+              type === Camera.Constants.Type.back
+                ? Camera.Constants.Type.front
+                : Camera.Constants.Type.back
+            )
           }
-          size={50}
-          color="white"
-        />
-      </TouchableOpacity>
+        >
+          <Ionicons
+            name={
+              type === Camera.Constants.Type.back
+                ? "camera-reverse"
+                : "camera-outline"
+            }
+            size={50}
+            color="white"
+          />
+        </TouchableOpacity>
+        <Text style={{ color: "white", fontSize: 15 }}>
+          {type === Camera.Constants.Type.back ? "셀카모드로 전환" : "되돌리기"}
+        </Text>
+      </Contents>
       <Zoom setZoom={setZoom} />
     </Container>
   );
